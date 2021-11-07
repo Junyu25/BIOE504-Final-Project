@@ -4,14 +4,6 @@ This repo provide several demos of image analysis and simulation used in SEER-FI
 
 For image analysis, a submodule ```nd2reader``` is used for loading ```.nd2``` files captured by microscopy from Nikon. It is easy to modify the code for analyzing the images in other format such as ```.tif```.
 
-For FISH probe design, we proved a prokka based script to extract the 16S and 23S sequence from WGS. We also proved a auto-submit script to calculated the Gibbs Free energy change during probe binding to corresponding rRNA on mathFISH. 
-
-For simulation used in SEER-FISH, we used a ```MATLAB``` script to evaluate the F1 score when applying SEER-FISH with a specific set of rRNA probes based on the hybridization efficiency given by mathFISH.
-
-For analysis of the sequencing data, we used botiwe2 to align the sequencing data with the reference sequence and extract the OTU table.
-
-Thanks to @Junyu for his help on probe design.
-Thanks to @Yuxiang for his help on amplicon sequencing data analysis.
 
 ## Image Analysis
 
@@ -77,98 +69,6 @@ Then the obtained code will be identified according to the codebook and bits of 
 The ```Demo``` of image anaysis is given in ```Demo_ImageAnalysis.m```
 
 
-## Simulation
-
-### MathFISH auto-submitter
-
-This python script is used for submit probe and rRNA sequence to [mathFISH](http://mathfish.cee.wisc.edu/ "mathFISH") to calculate ΔG. 
-
-You need to list the sequences of probes and rRNAs in separated ```txt``` files.
-
-For example, ```ProbeSequence.txt``` 
-
-```csv
-1, ~sequence of the probe~
-```
-
-and ```rRNASeq.txt```
-
-```csv
-1, ~sequence of 16S rRNA~, ~sequence of 23S rRNA~
-```
-
-Then run the script below to calculate the ΔG between each probe in ```ProbeSequence.txt``` and each rRNA in ```rRNASeq.txt```. The result will be given in ```DeltaGoverall_*_List.txt``` in the output folder.
-
-```bash
-python ./MAthFISH/MathFISH.py -p ./MathFISH/ProbeSequence.txt -r ./MathFISH/rRNASeq.txt -o ./MathFISH/Output
-```
-
-### Code Generater
-
-You can use the following script to generate the code book with correspounding colors, rounds and minimal Hamming Distance (HD).
-
-```matlab
-[CodexMatrix] = CodeGenerator(Color,Round,HD);
-```
-
-### F1 Score calculator
-
-```matlab
-[F1ScoreHarmMean,F1ScoreMean,Detection] = F1ScoreCal(Specify,SpecifySTD,StrainCode,CellNum,CorrBit)
-```
-
-## Sequencing data analysis
-
-### Requirement
-
-The following packages are required for sequnecing data analysis.
-
-```bash
-conda install -c bioconda fastqc # fastqc
-conda install -c bioconda samtools # samtools  
-conda install -c bioconda bowtie2 # bowtie2
-conda install -c bioconda bedtools # bedtools
-```
-
-```qiime2``` is required for merge and parse the double end sequencing data according to the barcodes.
-
-### Merge and Parse
-
-The following script requires ```qiime2``` environment.
-
-```bash
-vsearch --fastq_mergepairs Path_to_the_forward.fastq.gz \
-        --reverse Path_to_the_forward.fastq.gz \
-        --fastqout ./Seuencing/merged.fq \
-        --fastqout_notmerged_fwd ./Seuencing/unmapped_1.fq \ 
-        --fastqout_notmerged_rev ./Seuencing/unmapped_2.fq \
-        1>vserach_log.txt \
-        2>>vserach_log.txt
-```
-
-```bash
-python ./Seuencing/parse_sample_perfectmatch.py \
-        -i /Seuencing/merged.fq \
-        -t ./Seuencing/reference/sample_indexes.txt \
-        -f 20 -r 18 
-```
-
-The barcodes for each set of data should be listed in ```sample_indexes.txt``` in ```.scv``` format.
-
-### Alignment and Feature Extract
-
-We use ```Bowtie2``` to align the sequencing result to reference sequence and extract the OTU table.
-
-```bash
-conda deactivate
-bash /home/LDlab/BioSoft/Scripts/Bowtie2align_and_feature_extract.sh \
-        ./Seuencing/parse \
-        ./Seuencing/reference/strains_v5_v7.fa \
-        ./Seuencing1/reference/strains_bed.bed 
-```
-
-The reference sequence of each strain is listed in the  ```.fa``` file. And the sequence info is listed in the ```.bed``` file.
-
 ## Other
 
 ### ColorGenerator
@@ -178,20 +78,3 @@ To generate multiple colors in ```MATLAB``` for labeling multiple species at onc
 ```matlab
 [ColorRGB] = ColorGenerator(ColorNum)
 ```
-
-### DisplayBar
-
-There is a processing bar in ```[##>---]``` style displayed in Matlab command window when running ```for``` loops during tracking.
-
-The function ```DisplayBar``` is used to display the processing bar. The number of ```#``` on the screen indicates the percentage of the progress. The process bar is 80 characters in width. You can also use the process bar in all ```for``` loops as below,
-
-```matlab
-for Index = 1:Length
-    ......
-    [Percentage, Barlength] = DisplayBar(Index, Length);
-end
-```
-
-The bar would be shown in the command windows as below.
-
-![](./Resource/DisplayBar.gif)
