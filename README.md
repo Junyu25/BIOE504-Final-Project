@@ -2,6 +2,9 @@
 
 This repo provide several demos of image analysis and simulation used in SEER-FISH. These functions can be used in images analysis for bacterial/microbiome community, FISH probe design, SEER-FISH simulation and other appropriate situations.
 
+## Env
+- `Image Processing Toolkit`
+- `nd2reader`
 For image analysis, a submodule ```nd2reader``` is used for loading ```.nd2``` files captured by microscopy from Nikon. It is easy to modify the code for analyzing the images in other format such as ```.tif```.
 
 
