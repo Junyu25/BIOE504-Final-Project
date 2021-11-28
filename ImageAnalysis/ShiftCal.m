@@ -1,3 +1,4 @@
+%% ShiftCal
 function [DistanceX, DistanceY] = ShiftCal(PhaseImage, SectionSize, CorrectionSize)
 
     [Hight, Width, Num] = size(PhaseImage);
@@ -11,7 +12,7 @@ function [DistanceX, DistanceY] = ShiftCal(PhaseImage, SectionSize, CorrectionSi
         Image2 = Image2 - mean(mean(Image2));
         SectionImage1 = Image1(floor(Hight / 2) - SectionSize:floor(Hight / 2) + SectionSize, floor(Width / 2) - SectionSize:floor(Width / 2) + SectionSize);
         SectionImage2 = Image2(floor(Hight / 2) - CorrectionSize:floor(Hight / 2) + CorrectionSize, floor(Width / 2) - CorrectionSize:floor(Width / 2) + CorrectionSize);
-
+        % Calculate the crosscorrelation of two Images
         CrossCorr = xcorr2(SectionImage2, SectionImage1);
         [~, Location] = max(CrossCorr(:));
         [YY, XX] = ind2sub(size(CrossCorr), Location);

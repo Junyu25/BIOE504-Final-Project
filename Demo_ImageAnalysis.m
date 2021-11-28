@@ -10,18 +10,17 @@ NameAll = ls(['.\ImageAnalysis\Demo', filesep, '*', Type]);
 FileName = ['.\ImageAnalysis\Demo', filesep, NameAll(1, :)];
 [Path, ~, ~] = fileparts(FileName);
 
+%% iterate for 8 demo images
 for i = 1:8
-
     % FileName=[PathAll,filesep,NameAll(i,:)];
     % [Path,Name,~]=fileparts(FileName);
-
     if i == 1
         ImageInfo = ND2Info([Path, filesep, num2str(i), Type]);
-
+        %
         ScaleX = ImageInfo.metadata.channels(1).volume.axesCalibration(1);
         ScaleY = ImageInfo.metadata.channels(1).volume.axesCalibration(2);
         ScaleZ = ImageInfo.metadata.channels(1).volume.axesCalibration(3);
-
+        %
         if ScaleX == ScaleY
             ImageScale(i) = ScaleX;
         else
@@ -86,3 +85,5 @@ StrainCode(:, 12) = [1, 2, 3, 3, 2, 2, 3, 2];
 [StrainLikehood, Decode] = StrainIdentify(StrainCode, CodexRes, 2);
 
 %% Data Output
+
+image(image)

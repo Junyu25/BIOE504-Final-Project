@@ -1,3 +1,4 @@
+%% ImageSegment
 function [BW_Image] = ImageSegment(Image, varargin)
 
     sePattern = strel('disk', 1);

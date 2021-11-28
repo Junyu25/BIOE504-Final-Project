@@ -1,3 +1,4 @@
+%% Image Alignment
 function [PhaseImageShift, varargout] = Alignment(PhaseImage, varargin)
 
     if isempty(varargin)
@@ -8,7 +9,7 @@ function [PhaseImageShift, varargout] = Alignment(PhaseImage, varargin)
 
     SectionSize = 250;
     CorrectionSize = 400;
-
+    % Calcualte Shift distance
     [DistanceX, DistanceY] = ShiftCal(PhaseImage, SectionSize, CorrectionSize);
 
     if ImageOutNum > 0

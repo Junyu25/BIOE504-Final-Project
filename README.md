@@ -1,8 +1,8 @@
 ## Overview
 
-This repo provide several demos of image analysis and simulation used in SEER-FISH. These functions can be used in images analysis for bacterial/microbiome community, FISH probe design, SEER-FISH simulation and other appropriate situations.
 
-## Env
+## Environment
+- `MATLAB R2021b`
 - `Image Processing Toolkit`
 - `nd2reader`
 For image analysis, a submodule ```nd2reader``` is used for loading ```.nd2``` files captured by microscopy from Nikon. It is easy to modify the code for analyzing the images in other format such as ```.tif```.
@@ -72,12 +72,3 @@ Then the obtained code will be identified according to the codebook and bits of 
 The ```Demo``` of image anaysis is given in ```Demo_ImageAnalysis.m```
 
 
-## Other
-
-### ColorGenerator
-
-To generate multiple colors in ```MATLAB``` for labeling multiple species at once, you can use following function with desired number of colors, ```ColorNum```.
-
-```matlab
-[ColorRGB] = ColorGenerator(ColorNum)
-```
