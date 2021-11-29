@@ -1,11 +1,9 @@
-## Overview
-
-
+# Overview
+In this Final Project, we present the image analysis method form SEER-FISH @Junyu has participated.
 ## Environment
 - `MATLAB R2021b`
 - `Image Processing Toolkit`
-- `nd2reader`
-For image analysis, a submodule ```nd2reader``` is used for loading ```.nd2``` files captured by microscopy from Nikon. It is easy to modify the code for analyzing the images in other format such as ```.tif```.
+- `nd2reader` - [nd2reader](https://github.com/JacobZuo/nd2reader) for loading ```.nd2``` files captured by microscopy from Nikon.
 
 
 ## Image Analysis
@@ -17,7 +15,7 @@ Using the following commander to align multiple images in image stack ```Image``
 ```matlab
 [ImageAligned] = Alignment(Image)
 ```
-
+![](Resource/Alignment.png)
 The image stack will be aligned to the position with maximal cross correlation. The aligned image stack will be return as ```ImageAligned```.
 
 To align other image stacks with the same position as ```Image```, you can use,
@@ -53,7 +51,7 @@ You can adjust the segmentation with Parameter as below. These parameters are de
 |     ```Effectiveness```     	| The effectiveness for auto threshold. If the auto threshold gives a effectiveness less than the given value, the image will be cut into several pieces to find a better threshold (See parameter ```N``` below). For example, ```0.65```.                                                   	|
 |     ```N```     	| The image will be cut into ```N*N``` regions and the threshold for each region will be calculated. For example, ```10```.  
 
-### Bacterial species Identify
+### Strain Identification
 
 First, the color of each bacteria cell will be identified according to the fluorescent image stacks of each channel.
 
@@ -66,9 +64,10 @@ Then the obtained code will be identified according to the codebook and bits of 
 ```matlab
 [StrainLikehood,Decode] = StrainIndentify(StrainCode,CodexRes,CorrBit)
 ```
+![](Resource/Identification.png)
 
 ### Demo
 
 The ```Demo``` of image anaysis is given in ```Demo_ImageAnalysis.m```
-
+#### result
 
