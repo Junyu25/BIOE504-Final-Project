@@ -69,5 +69,9 @@ Then the obtained code will be identified according to the codebook and bits of 
 ### Demo
 
 The ```Demo``` of image anaysis is given in ```Demo_ImageAnalysis.m```
-#### result
+### result
+final stacked image!
+![](Resource/Result.jpg)
 
+### Acknowledgement
+Thanks for Dr. Wenlong Zuo for providing the data and instruction?
