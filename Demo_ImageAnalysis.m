@@ -32,10 +32,10 @@ for i = 1:8
 
     Image = ND2ReadSingle([Path, filesep, num2str(i), Type]);
     %Split to four images
-    FITCImage(:, :, i) = Image{1};
-    TRITCImage(:, :, i) = Image{2};
-    CY5Image(:, :, i) = Image{3};
-    PhaseImage(:, :, i) = Image{4};
+    FITCImage(:, :, i) = Image{1}; %FITC channel
+    TRITCImage(:, :, i) = Image{2}; %TRITC channel
+    CY5Image(:, :, i) = Image{3}; %Cy5 channel
+    PhaseImage(:, :, i) = Image{4}; %TD channel
 end
 
 %% Multiple Image Alignment
