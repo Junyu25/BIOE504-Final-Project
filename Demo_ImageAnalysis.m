@@ -5,9 +5,11 @@ addpath(genpath(pwd))
 
 %% Load the data
 Type = '.nd2';
-
+% Windows
 NameAll = ls(['.\ImageAnalysis\Demo', filesep, '*', Type]);
 FileName = ['.\ImageAnalysis\Demo', filesep, NameAll(1, :)];
+%NameAll = ls(['./ImageAnalysis/Demo', filesep, '*', Type]);
+%FileName = ['./ImageAnalysis/Demo', filesep, NameAll(1, :)];
 [Path, ~, ~] = fileparts(FileName);
 
 %% iterate for 8 demo images
@@ -31,10 +33,13 @@ for i = 1:8
     end
 
     Image = ND2ReadSingle([Path, filesep, num2str(i), Type]);
-
+    % Fluorescein isothiocyanate images 
     FITCImage(:, :, i) = Image{1};
+    % Tetramethylrhodamine images
     TRITCImage(:, :, i) = Image{2};
+    % Cy5 images
     CY5Image(:, :, i) = Image{3};
+    % Phase images 
     PhaseImage(:, :, i) = Image{4};
 end
 
@@ -43,12 +48,13 @@ end
 [PhaseImageShift, FITCImageShift, TRITCImageShift, CY5ImageShift] = Alignment(PhaseImage, FITCImage, TRITCImage, CY5Image);
 
 PhaseImageMean = mean(PhaseImageShift(:, :, :), 3);
+% calculate locally adaptive threshold for 2-D grayscale image
 AdaptBG = adaptthresh(mat2gray(PhaseImageMean), 0.5, 'ForegroundPolarity', 'dark');
 Normalize_Phase = mat2gray(double(PhaseImageMean) ./ AdaptBG);
 
 imshow(mat2gray(Normalize_Phase))
 
-%% Image segementation
+%% Image segementation-Marker-Controlled Watershed Segmentation
 
 sePattern = strel('disk', 1);
 AreaRange = [10, 1000];
