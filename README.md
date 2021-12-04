@@ -1,10 +1,11 @@
 # Overview
 In this Final Project, we present the image analysis method form SEER-FISH @Junyu has participated.
+
+![](Resource/Overview.png)
 ## Environment
 - `MATLAB R2021b`
 - `Image Processing Toolkit`
 - `nd2reader` - [nd2reader](https://github.com/JacobZuo/nd2reader) for loading ```.nd2``` files captured by microscopy from Nikon.
-
 
 ## Image Analysis
 
@@ -73,5 +74,11 @@ The ```Demo``` of image anaysis is given in ```Demo_ImageAnalysis.m```
 final stacked image!
 ![](Resource/Result.jpg)
 
+
+### Contribution
+Mainly focus on:
+- Image Alignment @Sijia
+- Image Segment @
+- Strain Identification @Junyu
 ### Acknowledgement
 Thanks for Dr. Wenlong Zuo for providing the data and instruction?

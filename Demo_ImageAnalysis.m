@@ -31,7 +31,7 @@ for i = 1:8
     end
 
     Image = ND2ReadSingle([Path, filesep, num2str(i), Type]);
-
+    %Split to four images
     FITCImage(:, :, i) = Image{1};
     TRITCImage(:, :, i) = Image{2};
     CY5Image(:, :, i) = Image{3};
