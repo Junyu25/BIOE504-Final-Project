@@ -28,6 +28,7 @@ function [PhaseImageShift, varargout] = Alignment(PhaseImage, varargin)
     Xmax = min(size(PhaseImage, 2) - max(DistanceX(:)), size(PhaseImage, 2));
 
     for k = 1:size(PhaseImage, 3)
+        % Crop out shifted phase images
         PhaseImageShift(:, :, k) = PhaseImage(Ymin + DistanceY(k):Ymax + DistanceY(k), Xmin + DistanceX(k):Xmax + DistanceX(k), k);
 
         if ImageOutNum > 0
