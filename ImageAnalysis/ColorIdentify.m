@@ -15,6 +15,7 @@ function [CodexRes] = ColorIdentify(BW_Image_Filtered, FITCImage, TRITCImage, CY
         Channel{2} = TRITCImage(:, :, Index(Round));
         Channel{3} = CY5Image(:, :, Index(Round));
 
+        
         for C = 1:3
 
             %         BackGroundIndensity=Channel{C}(~BW_Image_Filtered);

@@ -85,5 +85,8 @@ StrainCode(:, 12) = [1, 2, 3, 3, 2, 2, 3, 2];
 [StrainLikehood, Decode] = StrainIdentify(StrainCode, CodexRes, 2);
 
 %% Data Output
-
-image(image)
+labelBW = bwlabel(BW_Image_Segment);
+reginfo = regionprops(labelBW, 'Area');
+%all_area = [reginfo.Area];
+%rel_area = all_area(:) ./ max(all_area);
+%image(image)

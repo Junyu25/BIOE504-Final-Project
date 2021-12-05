@@ -1,4 +1,9 @@
 %CodexRes = ColorIdentify(BW_Image_Segment, FITCImageShift, TRITCImageShift, CY5ImageShift, 1:8);
+BW_Image_Filtered = BW_Image_Segment;
+FITCImage = FITCImageShift;
+TRITCImage = FITCImageShift;
+CY5Image = CY5ImageShift;
+
 CellRegion = regionprops(BW_Image_Filtered > 0, 'Area');
 % Intensity=cell(0);
 FluorescentHyp = zeros(3, size(CellRegion, 1));
@@ -8,6 +13,7 @@ IntensityColorAll = zeros(3, size(CellRegion, 1));
 
 Channel = cell(0);
 
+Index = 1:8;
 for Round = 1:size(Index, 2)
 
     Channel{1} = FITCImage(:, :, Index(Round));
@@ -37,14 +43,14 @@ for Round = 1:size(Index, 2)
 
     NonCellIndex = min(FluorescentProb(:, :), [], 1) > 0.05;
     ProbIndex = sum(FluorescentProb(:, :) == min(FluorescentProb(:, :), [], 1), 1) == 1;
-        [ProbColor, ~] = find(FluorescentProb(:, ProbIndex) == min(FluorescentProb(:, ProbIndex), [], 1));
-        [HighIndensity, ~] = find(IntensityColorAll(:, :) == max(IntensityColorAll(:, :), [], 1));
+    [ProbColor, ~] = find(FluorescentProb(:, ProbIndex) == min(FluorescentProb(:, ProbIndex), [], 1));
+    [HighIndensity, ~] = find(IntensityColorAll(:, :) == max(IntensityColorAll(:, :), [], 1));
 
-        CodexResRound = zeros(size(CellRegion, 1), 1);
+    CodexResRound = zeros(size(CellRegion, 1), 1);
 
-        CodexResRound(ProbIndex) = ProbColor;
-        CodexResRound(NonCellIndex) = 0;
-        CodexResRound(~NonCellIndex & ~ProbIndex) = HighIndensity(~NonCellIndex & ~ProbIndex);
-        CodexRes(:, Round) = CodexResRound;
+    CodexResRound(ProbIndex) = ProbColor;
+    CodexResRound(NonCellIndex) = 0;
+    CodexResRound(~NonCellIndex & ~ProbIndex) = HighIndensity(~NonCellIndex & ~ProbIndex);
+    CodexRes(:, Round) = CodexResRound;
 
-    end
+end
