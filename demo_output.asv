@@ -23,11 +23,15 @@ CY5ImageShift_color = mat2gray(CY5ImageShift(145:645,130:630,1));
 
 imshow(FITCImageShift(145:645,130:630,1))
 imshow(TRITCImageShift(145:645,130:630,1))
+
+
 imshow(CY5ImageShift(145:645,130:630,2))
+
 
 imageRed = uint8(zeros(501, 501,3));
 imageRed(:, :,1) = CY5ImageShift(145:645,130:630,1);
 imshow(imageRed);
+
 
 imageRed = uint8(zeros(501, 501, 3));
 imageRed(:, :,1) = CY5ImageShift(145:645,130:630,1);
@@ -100,7 +104,7 @@ imshow(CY5ImageShift(145:645,130:630,1))
 
 
 
-%% Labled final image
+
 for i = 1:12
     SingleStrainColor = StrainColors(i,:);
     InitColors = ones(12,3);
@@ -129,5 +133,3 @@ Final_image_small=LabeledImage(145:645,130:630,:);
 figure
 imshow(Final_image_small)
 imwrite(LabeledImage(145:645,130:630,:), 'demo_image.png');
-
-% How to add Legend?
