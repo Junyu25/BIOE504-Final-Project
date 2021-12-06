@@ -99,3 +99,31 @@ LabeledImage = labeloverlay(mat2gray(BW_Image_Segment), StrainImageAll, 'ColorMa
 
 figure
 imshow(LabeledImage)
+
+for i = 1:12
+    SingleStrainColor = StrainColors(i,:);
+    InitColors = ones(12,3);
+    InitColors(i,:) = SingleStrainColor;
+    InitColors(13,:) = StrainColors(13,:);
+    InitColors(14,:) = StrainColors(14,:);
+    SingleStrainColor
+    SingleStrainLabeledImage = labeloverlay(mat2gray(zeros(5066,5037)), StrainImageAll, 'ColorMap', InitColors, 'Transparency', 0.25);
+    imwrite(SingleStrainLabeledImage(145:645,130:630,:), sprintf('SingleStrainLabeledImage_%d.png',i));
+    %figure
+    %imshow(SingleStrainLabeledImage(145:645,130:630,:))
+    %savefig(labeloverlay(mat2gray(BW_Image_Segment), StrainImageAll, 'ColorMap', InitColors, 'Transparency', 0.25), sprintf('SingleStrainLabeledImage_%d.fig',i));
+end
+
+%code book to strain name!!!
+InitColors = ones(12,3);
+InitColors(13,:) = StrainColors(13,:);
+InitColors(14,:) = StrainColors(14,:);
+
+imshow(mat2gray(zeros(5066,5037)))
+%Alignment_small=BW_Image_Segment(145:645,130:630);
+%Alignment_large=BW_Image_Segment(1:801,1:801);
+
+Final_image_small=LabeledImage(145:645,130:630,:);
+figure
+imshow(Final_image_small)
+imwrite(LabeledImage(145:645,130:630,:), 'demo_image.png');
