@@ -127,3 +127,25 @@ Final_image_small=LabeledImage(145:645,130:630,:);
 figure
 imshow(Final_image_small)
 imwrite(LabeledImage(145:645,130:630,:), 'demo_image.png');
+
+%% Display fluorescence images
+
+% CY5
+imageCY5 = zeros(5066,5037,3);
+imageCY5(:,:,1) = mat2gray(CY5ImageShift(:,:,1))*194/255;
+imageCY5(:,:,2) = mat2gray(CY5ImageShift(:,:,1))*24/255;
+imageCY5(:,:,3) = mat2gray(CY5ImageShift(:,:,1))*194/255;
+imshow(imageCY5);
+% FITC 
+imageFITC = zeros(5066,5037,3);
+imageFITC(:,:,1) = mat2gray(FITCImageShift(:,:,1))*41/255;
+imageFITC(:,:,2) = mat2gray(FITCImageShift(:,:,1))*179/255;
+imageFITC(:,:,3) = mat2gray(FITCImageShift(:,:,1))*84/255;
+imshow(imageFITC);
+
+% TRITC 
+imageTRITC = zeros(5066,5037,3);
+imageTRITC(:,:,1) = mat2gray(TRITCImageShift(:,:,1))*239/255;
+imageTRITC(:,:,2) = mat2gray(TRITCImageShift(:,:,1))*101/255;
+imageTRITC(:,:,3) = mat2gray(TRITCImageShift(:,:,1))*45/255;
+imshow(imageTRITC);
