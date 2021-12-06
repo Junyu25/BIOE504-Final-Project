@@ -32,7 +32,7 @@ To segment each bacterial cell in the image, you can use ```ImageSegment``` func
 [SegmentedBWImage] = ImageSegment(Image)
 ```
 
-![](./Resource/Segmentation.jpg)
+![](./Resource/Segmentation.png)
 
 
 
