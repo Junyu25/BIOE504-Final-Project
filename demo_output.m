@@ -130,4 +130,10 @@ figure
 imshow(Final_image_small)
 imwrite(LabeledImage(145:645,130:630,:), 'demo_image.png');
 
+% Add scale bar
+[ImageWithBar, BarLength] = AddScaleBar(Final_image_small, ImageScale);
+imshow(ImageWithBar)
+
 % How to add Legend?
+legend([b1 b2],'Bar Chart 1','Bar Chart 2')
+
