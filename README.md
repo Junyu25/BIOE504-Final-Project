@@ -65,7 +65,7 @@ Then the obtained code will be identified according to the codebook and bits of 
 ```matlab
 [StrainLikehood,Decode] = StrainIndentify(StrainCode,CodexRes,CorrBit)
 ```
-![](Resource/Identification.png)
+![](Resource/PA_strain12.jpg)
 
 ### Demo
 
