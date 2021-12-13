@@ -1,5 +1,5 @@
 # Overview
-In this Final Project, we present the image analysis method form SEER-FISH @Junyu has participated.
+In this Final Project, we present the image analysis method of sequential FISH @Junyu has participated.
 
 ![](Resource/Overview.png)
 ## Environment
@@ -71,7 +71,7 @@ Then the obtained code will be identified according to the codebook and bits of 
 
 The ```Demo``` of image anaysis is given in ```Demo_ImageAnalysis.m```
 ### Result
-final stacked image of 12 strains!
+Final stacked image of 12 strains in Demo dataset.
 ![](Resource/Final_result.jpg)
 
 
