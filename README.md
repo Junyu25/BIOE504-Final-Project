@@ -70,15 +70,17 @@ Then the obtained code will be identified according to the codebook and bits of 
 ### Demo
 
 The ```Demo``` of image anaysis is given in ```Demo_ImageAnalysis.m```
-### result
-final stacked image!
+### Result
+final stacked image of 12 strains!
 ![](Resource/Final_result.jpg)
 
 
 ### Contribution
 Mainly focus on:
 - Image Alignment @Sijia
-- Image Segment @
+- Image Segmentation @Jingyi
 - Strain Identification @Junyu
 ### Acknowledgement
-Thanks for Dr. Wenlong Zuo for providing the data and instruction?
+Thanks to Dr. Wenlong Zuo for providing the raw data and adequate instruction.
+Thanks to Zhaohui Cao and Prof. Lei Dai for introducing the new technology of sequential FISH.
+Thanks to Prof. Fan Lam for introducing the knowledge of BIOE 504 that was used in the image analysis.
