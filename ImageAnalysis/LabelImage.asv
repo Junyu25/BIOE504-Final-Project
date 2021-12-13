@@ -16,3 +16,4 @@ function [StrainImageAll, StrainImage] = LabelImage(BW_Image_Segment, Decode)
 
 end
 
+(StrainImage(:,:,1)

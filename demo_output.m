@@ -41,7 +41,8 @@ imageBlue = uint8(zeros(501, 501, 3));
 imageBlue(:, :,3) = CY5ImageShift(145:645,130:630,1);
 imshow(imageBlue)
 
-
+imshow(CY5ImageShift(:,:,1))
+imshow(CY5ImageShift(:,:,2))
 %% Display fluorescence images
 
 % CY5
@@ -76,28 +77,28 @@ imshow(imageCY5);
 strain = 12;
 for i = 1:8
     imageInit = zeros(501, 501, 3);
+    if StrainCode(i, strain) == 3
+        imageInit(:,:,1) = mat2gray(CY5ImageShift(145:645,130:630,i))*194/255;
+        imageInit(:,:,2) = mat2gray(CY5ImageShift(145:645,130:630,i))*24/255;
+        imageInit(:,:,3) = mat2gray(CY5ImageShift(145:645,130:630,i))*194/255;
+    end
     if StrainCode(i, strain) == 1
-        imageInit(:,:,1) = mat2gray(CY5ImageShift(145:645,130:630,1))*194/255;
-        imageInit(:,:,2) = mat2gray(CY5ImageShift(145:645,130:630,1))*24/255;
-        imageInit(:,:,3) = mat2gray(CY5ImageShift(145:645,130:630,1))*194/255;
+        imageInit(:,:,1) = mat2gray(FITCImageShift(145:645,130:630,i))*41/255;
+        imageInit(:,:,2) = mat2gray(FITCImageShift(145:645,130:630,i))*179/255;
+        imageInit(:,:,3) = mat2gray(FITCImageShift(145:645,130:630,i))*84/255;
     end
     if StrainCode(i, strain) == 2
-        imageInit(:,:,1) = mat2gray(CY5ImageShift(145:645,130:630,1))*41/255;
-        imageInit(:,:,2) = mat2gray(CY5ImageShift(145:645,130:630,1))*179/255;
-        imageInit(:,:,3) = mat2gray(CY5ImageShift(145:645,130:630,1))*84/255;
-    end
-    if StrainCode(i, strain) == 3
-        imageInit(:,:,1) = mat2gray(CY5ImageShift(145:645,130:630,1))*239/255;
-        imageInit(:,:,2) = mat2gray(CY5ImageShift(145:645,130:630,1))*101/255;
-        imageInit(:,:,3) = mat2gray(CY5ImageShift(145:645,130:630,1))*45/255;
+        imageInit(:,:,1) = mat2gray(TRITCImageShift(145:645,130:630,i))*239/255;
+        imageInit(:,:,2) = mat2gray(TRITCImageShift(145:645,130:630,i))*101/255;
+        imageInit(:,:,3) = mat2gray(TRITCImageShift(145:645,130:630,i))*45/255;
     end
     %imageInit(:, :,StrainCode(i, 2)) = CY5ImageShift(145:645,130:630,i);
-    imshow(imageInit)
+    %imshow(imageInit)
     imwrite(imageInit, sprintf('SingleStrain_%d_Round_%d.png',strain,i));
 end
 
 imshow(CY5ImageShift(145:645,130:630,1))
-
+imshow(CY5ImageShift(145:645,130:630,2))
 
 
 %% Labled final image
@@ -137,3 +138,28 @@ imshow(ImageWithBar)
 % How to add Legend?
 legend([b1 b2],'Bar Chart 1','Bar Chart 2')
 
+legend(StrainColors)
+
+
+
+unique(Decode(:, 1))
+
+%function [StrainImageAll, StrainImage] = LabelImage(BW_Image_Segment, Decode)
+[~, Labels] = bwboundaries(BW_Image_Segment, 'noholes');
+
+[StrainIndex, ~, UniqueIndex] = unique(Labels);
+StrainImageAll = zeros(size(Labels));
+
+for i = 1:max(Decode(:, 1))
+    StrainIndex(2:end) = double(Decode(:, 1) == i);
+    StrainImage(:, :, i) = reshape(StrainIndex(UniqueIndex), size(Labels));
+    StrainImageAll = StrainImageAll + StrainImage(:, :, i) .* i;
+end
+
+StrainIndex(2:end) = double(Decode(:, 2) == 0);
+StrainImage(:, :, max(Decode(:, 1)) + 1) = reshape(StrainIndex(UniqueIndex), size(Labels));
+StrainImageAll = StrainImageAll + StrainImage(:, :, (max(Decode(:, 1)) + 1)) .* (max(Decode(:, 1)) + 1);
+
+
+
+imshow(StrainImage(145:645,130:630,6))

@@ -32,7 +32,7 @@ To segment each bacterial cell in the image, you can use ```ImageSegment``` func
 [SegmentedBWImage] = ImageSegment(Image)
 ```
 
-![](./Resource/Segmentation.png)
+![](./Resource/Segmentation.jpg)
 
 
 
@@ -72,7 +72,7 @@ Then the obtained code will be identified according to the codebook and bits of 
 The ```Demo``` of image anaysis is given in ```Demo_ImageAnalysis.m```
 ### result
 final stacked image!
-![](Resource/Result.jpg)
+![](Resource/Final_result.jpg)
 
 
 ### Contribution
