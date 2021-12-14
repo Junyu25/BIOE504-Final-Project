@@ -1,5 +1,5 @@
 # Overview
-In this Final Project, we present the image analysis method of sequential FISH @Junyu has participated.
+In this Final Project, we present the image analysis method of sequential FISH project @Junyu has participated.
 
 ![](Resource/Overview.png)
 ## Environment
